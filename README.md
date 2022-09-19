@@ -1,9 +1,9 @@
 # Team OMS
-## OMS development
-This folder contains the backend logic and files 
+## OMS Back End Development
+This folder contains the back end logic and files 
 for managing the OMS of our system. The front end
 code will be located at the following link:
-[OMS Frontend](https://github.com/jagfnisum/oms_frontend)
+[OMS Back End](https://github.com/jagfnisum/oms_frontend)
 
 
 
