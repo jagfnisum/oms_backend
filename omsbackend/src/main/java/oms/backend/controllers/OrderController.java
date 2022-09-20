@@ -23,7 +23,7 @@ public class OrderController {
 
     @PutMapping("/updateOrder/shipped/{id}")
     public ResponseEntity<String> shippedOrder(@PathVariable("id") int id){
-        boolean success = service.updateOrder(id, "SHIPPED");
+        boolean success = service.updateOrder(id, "Shipped");
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).body(id + " Shipped successfully");
         }
@@ -33,7 +33,7 @@ public class OrderController {
     }
     @PutMapping("/updateOrder/cancelled/{id}")
     public ResponseEntity<String> cancelledOrder(@PathVariable("id") int id){
-        boolean success = service.updateOrder(id, "CANCELLED");
+        boolean success = service.updateOrder(id, "Canceled");
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).body(id + " Cancelled successfully");
         }
@@ -44,7 +44,7 @@ public class OrderController {
 
     @PutMapping("/updateOrder/delivered/{id}")
     public ResponseEntity<String> deliveredOrder(@PathVariable("id") int id) {
-        boolean success = service.updateOrder(id, "DELIVERED");
+        boolean success = service.updateOrder(id, "Delivered");
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).body(id + " Delivered successfully");
         }
@@ -53,7 +53,7 @@ public class OrderController {
         }
     }
 
-    @GetMapping()
+    @GetMapping("/getOrder/{id}")
     public ResponseEntity<Order> getOrderById(int id){
         Optional <Order> order = service.getOrderById(id);
         if(order.isPresent()) {
@@ -62,7 +62,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @GetMapping()
+    @GetMapping("/getOrder")
     public List<Order> getOrders(){
         return service.getOrders();
     }
