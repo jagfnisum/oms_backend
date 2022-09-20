@@ -8,60 +8,60 @@ import javax.persistence.Table;
 @Entity
 public class Order {
     @Id
-    int orderID;
-    int userId;
-    int addressID;
-    float price;
-    int creditCardID;
-    String orderStatus;
-    String dateShipped;
-    String dateDelivered;
+    int OrderID;
+    int UserID;
+    int AddressID;
+    float Price;
+    int CreditCardID;
+    String OrderStatus;
+    String DateShipped;
+    String DateDelivered;
     public int getOrderID() {
-        return orderID;
+        return OrderID;
     }
     public void setOrderID(int orderID) {
-        this.orderID = orderID;
+        this.OrderID = orderID;
     }
     public int getUserId() {
-        return userId;
+        return UserID;
     }
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.UserID = userId;
     }
     public int getAddressID() {
-        return addressID;
+        return AddressID;
     }
     public void setAddressID(int addressID) {
-        this.addressID = addressID;
+        this.AddressID = addressID;
     }
     public float getPrice() {
-        return price;
+        return Price;
     }
     public void setPrice(float price) {
-        this.price = price;
+        this.Price = price;
     }
     public int getCreditCardID() {
-        return creditCardID;
+        return CreditCardID;
     }
     public void setCreditCardID(int creditCardID) {
-        this.creditCardID = creditCardID;
+        this.CreditCardID = creditCardID;
     }
     public String getOrderStatus() {
-        return orderStatus;
+        return OrderStatus;
     }
     public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+        this.OrderStatus = orderStatus;
     }
     public String getDateShipped() {
-        return dateShipped;
+        return DateShipped;
     }
     public void setDateShipped(String dateShipped) {
-        this.dateShipped = dateShipped;
+        this.DateShipped = dateShipped;
     }
     public String getDateDelivered() {
-        return dateDelivered;
+        return DateDelivered;
     }
     public void setDateDelivered(String dateDelivered) {
-        this.dateDelivered = dateDelivered;
+        this.DateDelivered = dateDelivered;
     }
 }
