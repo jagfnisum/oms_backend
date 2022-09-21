@@ -57,4 +57,14 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrders() {
         return repo.findAll();
     }
+
+	@Override
+	public boolean createOrder(Order order) {
+		Order newlyCreatedOrder = repo.save(order);
+		if(newlyCreatedOrder != null) {
+			return true;
+		} else {
+			return false;
+		}		
+	}
 }

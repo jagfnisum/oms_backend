@@ -9,4 +9,5 @@ public interface OrderService {
     boolean updateOrder(int id, String status);
     Optional<Order> getOrderById(int id);
     List<Order> getOrders();
+    boolean createOrder(Order order);
 }
