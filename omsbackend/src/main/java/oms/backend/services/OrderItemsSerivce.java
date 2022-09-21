@@ -1,6 +1,7 @@
-package oms.backend.omsbackend.service;
+package oms.backend.services;
 import java.util.List;
-import oms.backend.omsbackend.model.OrderItems;
+
+import oms.backend.models.OrderItems;
 
 public interface OrderItemsSerivce {
     List<OrderItems> getAllItemsInOrder(int id);

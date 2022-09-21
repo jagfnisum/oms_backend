@@ -1,4 +1,4 @@
-package oms.backend.omsbackend.model;
+package oms.backend.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

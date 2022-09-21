@@ -1,11 +1,12 @@
-package oms.backend.omsbackend.service;
+package oms.backend.services;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import oms.backend.omsbackend.model.OrderItems;
-import oms.backend.omsbackend.respositories.OrderItemsRepository;
+
+import oms.backend.models.OrderItems;
+import oms.backend.repos.OrderItemsRepository;
 
 @Service
 public class OrderItemsServiceImpl implements OrderItemsSerivce{
@@ -22,7 +23,6 @@ public class OrderItemsServiceImpl implements OrderItemsSerivce{
     public List<OrderItems> getAllItemsInOrder(int id) {
         List<OrderItems> items = new ArrayList<OrderItems>();
         List<OrderItems> exist = repo.findAll();
-        // System.out.println("test"+repo.findById(6));
         if(exist.isEmpty()){
             return exist;
         }else{
@@ -48,9 +48,6 @@ public class OrderItemsServiceImpl implements OrderItemsSerivce{
     @Override
     public boolean updateOrderItem(int orderid, String upc, int updatedQuantity) {
         List<OrderItems> exist = repo.findAll();
-        System.out.println(orderid);
-        System.out.println(upc);
-        System.out.println(updatedQuantity);
         if(exist.isEmpty()){
             return false;
         }else{
