@@ -23,19 +23,19 @@ public class OrderServiceImpl implements OrderService {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             switch (status) {
-                case "SHIPPED":
+                case "Shipped":
                     exists.get().setDateShipped(dtf.format(now));
                     exists.get().setOrderStatus(status);
                     repo.save(exists.get());
                     return true;
 
-                case "DELIVERED":
+                case "Delivered":
                     exists.get().setDateDelivered(dtf.format(now));
                     exists.get().setOrderStatus(status);
                     repo.save(exists.get());
                     return true;
 
-                case "CANCELLED":
+                case "Canceled":
                     exists.get().setOrderStatus(status);
                     repo.save(exists.get());
                     return true;

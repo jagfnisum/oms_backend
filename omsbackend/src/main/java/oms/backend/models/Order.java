@@ -1,5 +1,6 @@
 package oms.backend.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,10 +13,19 @@ public class Order {
     int UserID;
     int AddressID;
     float Price;
+    @Column(name = "CreditCardID", nullable = false)
     int CreditCardID;
-    String OrderStatus;
+    String DateOrdered;
     String DateShipped;
     String DateDelivered;
+    String OrderStatus;
+
+    public String getDateOrdered() {
+        return DateOrdered;
+    }
+    public void setDateOrdered(String dateOrdered) {
+        DateOrdered = dateOrdered;
+    }
     public int getOrderID() {
         return OrderID;
     }

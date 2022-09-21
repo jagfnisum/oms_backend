@@ -53,8 +53,8 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/getOrder/{id}")
-    public ResponseEntity<Order> getOrderById(int id){
+    @GetMapping("/getOrders/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable("id") int id){
         Optional <Order> order = service.getOrderById(id);
         if(order.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(order.get());
@@ -62,7 +62,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @GetMapping("/getOrder")
+    @GetMapping("/getOrders")
     public List<Order> getOrders(){
         return service.getOrders();
     }
