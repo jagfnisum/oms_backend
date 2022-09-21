@@ -11,7 +11,6 @@ import oms.backend.omsbackend.respositories.OrderItemsRepository;
 public class OrderItemsServiceImpl implements OrderItemsSerivce{
     @Autowired
     OrderItemsRepository repo;
-
     /**
      * This is a method that takes in an orderid and finds
      * all items included in that order. It returns a list of
@@ -23,6 +22,7 @@ public class OrderItemsServiceImpl implements OrderItemsSerivce{
     public List<OrderItems> getAllItemsInOrder(int id) {
         List<OrderItems> items = new ArrayList<OrderItems>();
         List<OrderItems> exist = repo.findAll();
+        // System.out.println("test"+repo.findById(6));
         if(exist.isEmpty()){
             return exist;
         }else{
@@ -48,11 +48,14 @@ public class OrderItemsServiceImpl implements OrderItemsSerivce{
     @Override
     public boolean updateOrderItem(int orderid, String upc, int updatedQuantity) {
         List<OrderItems> exist = repo.findAll();
+        System.out.println(orderid);
+        System.out.println(upc);
+        System.out.println(updatedQuantity);
         if(exist.isEmpty()){
             return false;
         }else{
             for(OrderItems current:exist){
-                if(current.getOrderid()==orderid && current.getUpc()==upc){      
+                if(current.getOrderid()==orderid && current.getUpc().equals(upc)){    
                     current.setQuantity(updatedQuantity);
                     repo.save(current);
                     return true;
@@ -61,4 +64,5 @@ public class OrderItemsServiceImpl implements OrderItemsSerivce{
         }
         return false;
     }
+
 }
