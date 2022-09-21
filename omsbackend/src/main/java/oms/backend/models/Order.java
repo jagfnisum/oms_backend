@@ -1,6 +1,5 @@
 package oms.backend.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,69 +8,68 @@ import javax.persistence.Table;
 @Entity
 public class Order {
     @Id
-    int OrderID;
-    int UserID;
-    int AddressID;
-    float Price;
-    @Column(name = "CreditCardID", nullable = false)
-    int CreditCardID;
-    String DateOrdered;
-    String DateShipped;
-    String DateDelivered;
-    String OrderStatus;
+    int order_id;
+    int user_id;
+    int address_id;
+    float price;
+    int credit_card_id;
+    String date_ordered;
+    String date_shipped;
+    String date_delivered;
+    String order_status;
 
     public String getDateOrdered() {
-        return DateOrdered;
+        return date_delivered;
     }
     public void setDateOrdered(String dateOrdered) {
-        DateOrdered = dateOrdered;
+        date_delivered = dateOrdered;
     }
     public int getOrderID() {
-        return OrderID;
+        return order_id;
     }
     public void setOrderID(int orderID) {
-        this.OrderID = orderID;
+        this.order_id = orderID;
     }
     public int getUserId() {
-        return UserID;
+        return user_id;
     }
     public void setUserId(int userId) {
-        this.UserID = userId;
+        this.user_id = userId;
     }
     public int getAddressID() {
-        return AddressID;
+        return address_id;
     }
     public void setAddressID(int addressID) {
-        this.AddressID = addressID;
+        this.address_id = addressID;
     }
     public float getPrice() {
-        return Price;
+        return price;
     }
     public void setPrice(float price) {
-        this.Price = price;
+        this.price = price;
     }
     public int getCreditCardID() {
-        return CreditCardID;
+        return credit_card_id;
     }
     public void setCreditCardID(int creditCardID) {
-        this.CreditCardID = creditCardID;
+        this.credit_card_id = creditCardID;
     }
     public String getOrderStatus() {
-        return OrderStatus;
+        return order_status;
     }
     public void setOrderStatus(String orderStatus) {
-        this.OrderStatus = orderStatus;
+        this.order_status = orderStatus;
     }
     public String getDateShipped() {
-        return DateShipped;
+        return date_shipped;
     }
     public void setDateShipped(String dateShipped) {
-        this.DateShipped = dateShipped;
+        this.date_shipped = dateShipped;
     }
     public String getDateDelivered() {
-        return DateDelivered;
+        return date_delivered;
     }
     public void setDateDelivered(String dateDelivered) {
-        this.DateDelivered = dateDelivered;
+        this.date_delivered = dateDelivered;
     }
 }
