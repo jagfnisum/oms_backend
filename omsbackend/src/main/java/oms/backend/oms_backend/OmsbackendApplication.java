@@ -1,4 +1,4 @@
-package oms.backend;
+package oms.backend.oms_backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
