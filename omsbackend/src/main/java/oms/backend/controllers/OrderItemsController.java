@@ -39,28 +39,29 @@ public class OrderItemsController {
     }
     
 
-    //Old Patch method that does not work for our current database
-    //Uncomment if required to use PatchMapping instead of PutMapping
 
-    // /**
-    //  * 
-    //  * A method to update an item's quantity within an order
-    //  * @param orderid the id of the order to be updated
-    //  * @param upc the product id of the product to be udpated
-    //  * @param updatedQuantity the amount we want to update our item to
-    //  * @return A response entity that specifies whether or not we were
-    //  * able to update the item in the database. If not, we will return a 
-    //  * bad request http status
-    //  */
-    // @PatchMapping("/updateItemQuantity/{orderid}/{upc}/{updatedQuantity}")
-    // public ResponseEntity<String> updateItem(@PathVariable("orderid") int orderid,
-    //  @PathVariable("upc") String upc, @PathVariable("updatedQuantity") int updatedQuantity){
-    //     boolean updated = service.updateOrderItem(orderid, upc, updatedQuantity);
-    //     if(updated){
-    //         return ResponseEntity.status(HttpStatus.OK).body("Item "+upc+" updated to "+ updatedQuantity);
-    //     }
-    //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-    // }
+    /**
+     * Note: Use this api call if you want to use PatchMapping to update quantity
+     * rather than PutMapping. Please note that you are not able to patch
+     * via the browser url, you must use a tool such as postman in order to patch
+     * 
+     * A method to update an item's quantity within an order
+     * @param orderid the id of the order to be updated
+     * @param upc the product id of the product to be udpated
+     * @param updatedQuantity the amount we want to update our item to
+     * @return A response entity that specifies whether or not we were
+     * able to update the item in the database. If not, we will return a 
+     * bad request http status
+     */
+    @PatchMapping("/updateItemQuantity/{orderid}/{upc}/{updatedQuantity}")
+    public ResponseEntity<String> updateItem(@PathVariable("orderid") int orderid,
+     @PathVariable("upc") String upc, @PathVariable("updatedQuantity") int updatedQuantity){
+        boolean updated = service.updateOrderItem(orderid, upc, updatedQuantity);
+        if(updated){
+            return ResponseEntity.status(HttpStatus.OK).body("Item "+upc+" updated to "+ updatedQuantity);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
 
 
     /**
