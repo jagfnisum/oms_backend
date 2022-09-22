@@ -24,3 +24,14 @@
 [DEBUG] 2022-09-22 11:16:56.050 [main] OmsbackendApplication - Running with Spring Boot v2.7.3, Spring v5.3.22
 [INFO ] 2022-09-22 11:16:56.054 [main] OmsbackendApplication - No active profile set, falling back to 1 default profile: "default"
 [INFO ] 2022-09-22 11:17:01.202 [main] OmsbackendApplication - Started OmsbackendApplication in 5.507 seconds (JVM running for 6.729)
+[INFO ] 2022-09-22 16:17:03.940 [main] OmsbackendApplication - Starting OmsbackendApplication using Java 18.0.2.1 on jiayuedeMacBook-Air.local with PID 33670 (/Users/jiayue/Downloads/oms_backend/omsbackend/target/classes started by jiayue in /Users/jiayue/Downloads/oms_backend)
+[DEBUG] 2022-09-22 16:17:03.954 [main] OmsbackendApplication - Running with Spring Boot v2.7.3, Spring v5.3.22
+[INFO ] 2022-09-22 16:17:03.959 [main] OmsbackendApplication - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2022-09-22 16:33:14.756 [main] OmsbackendApplication - Starting OmsbackendApplication using Java 18.0.2.1 on jiayuedeMacBook-Air.local with PID 34087 (/Users/jiayue/Downloads/oms_backend/omsbackend/target/classes started by jiayue in /Users/jiayue/Downloads/oms_backend)
+[DEBUG] 2022-09-22 16:33:14.773 [main] OmsbackendApplication - Running with Spring Boot v2.7.3, Spring v5.3.22
+[INFO ] 2022-09-22 16:33:14.775 [main] OmsbackendApplication - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2022-09-22 16:33:20.959 [main] OmsbackendApplication - Started OmsbackendApplication in 6.688 seconds (JVM running for 8.134)
+[INFO ] 2022-09-22 16:40:59.513 [main] OmsbackendApplication - Starting OmsbackendApplication using Java 18.0.2.1 on jiayuedeMacBook-Air.local with PID 34332 (/Users/jiayue/Downloads/oms_backend/omsbackend/target/classes started by jiayue in /Users/jiayue/Downloads/oms_backend)
+[DEBUG] 2022-09-22 16:40:59.530 [main] OmsbackendApplication - Running with Spring Boot v2.7.3, Spring v5.3.22
+[INFO ] 2022-09-22 16:40:59.533 [main] OmsbackendApplication - No active profile set, falling back to 1 default profile: "default"
+[INFO ] 2022-09-22 16:41:06.019 [main] OmsbackendApplication - Started OmsbackendApplication in 6.926 seconds (JVM running for 8.582)

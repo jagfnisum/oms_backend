@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/oms_backend.iml" filepath="$PROJECT_DIR$/.idea/oms_backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/omsbackend/omsbackend.iml" filepath="$PROJECT_DIR$/omsbackend/omsbackend.iml" />
     </modules>
   </component>
 </project>
