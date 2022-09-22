@@ -23,7 +23,7 @@ public class TestGetOrders {
     private Response response;
     private final static Logger log = LogManager.getLogger(TestGetOrders.class);
 
-    private Integer port = 8080;
+    private static Integer port = 8080;
 
     private Integer orderId;
     private String url = "http://localhost:";
@@ -33,7 +33,7 @@ public class TestGetOrders {
     @BeforeAll
     public static void setUp() {
         log.info("Setting url = \"http://localhost:\"");
-        log.info("Setting port = 8080");
+        log.info("Setting port = " + port);
     }
 
     @BeforeEach
@@ -52,7 +52,7 @@ public class TestGetOrders {
                 then().
                 extract().response();
         int statusCode = response.getStatusCode();
-        log.info("The the status code = " +statusCode);
+        log.info("Then the status code = " +statusCode);
         Assertions.assertEquals(400, statusCode);
     }
 
@@ -66,7 +66,7 @@ public class TestGetOrders {
                 then().
                 extract().response();
         int statusCode = response.getStatusCode();
-        log.info("The the status code = " +statusCode);
+        log.info("Then the status code = " +statusCode);
         Assertions.assertEquals(200, statusCode);
     }
 
@@ -79,7 +79,7 @@ public class TestGetOrders {
                 then().
                 extract().response();
         int statusCode = response.getStatusCode();
-        log.info("Then the status code = " +statusCode);
+        log.info("Thenn the status code = " +statusCode);
 
         JsonPath jsonPath = response.jsonPath();
         orderId = jsonPath.get("orderID");
