@@ -86,7 +86,7 @@ public class OrderController {
     public ResponseEntity<String> createOrder(@RequestBody Order order){
     	boolean success = service.createOrder(order);
     	if(success) {
-    		return ResponseEntity.status(HttpStatus.OK).body("Order created");
+    		return ResponseEntity.status(HttpStatus.CREATED).body("Order created");
     	} else {
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     	}
