@@ -13,10 +13,8 @@ import oms.backend.services.OrderItemsSerivce;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-@RequestMapping("api/orderitems")
+@RequestMapping("api/order/items")
 @RestController
 public class OrderItemsController {
     @Autowired
@@ -80,12 +78,12 @@ public class OrderItemsController {
      * was successfully updated. OK for if updated correctly, Bad Request 
      * for failed update.
      */
-    @PutMapping(value="updateItem")
-    public ResponseEntity<OrderItems> updateItem(@RequestBody OrderItems item){
-        boolean updated = service.updateOrderItem(item.getOrderid(), item.getUpc(), item.getQuantity());
-        if(updated==true){
-            return ResponseEntity.status(HttpStatus.OK).body(item);
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-    }
+    // @PutMapping(value="updateItem")
+    // public ResponseEntity<OrderItems> updateItem(@RequestBody OrderItems item){
+    //     boolean updated = service.updateOrderItem(item.getOrderid(), item.getUpc(), item.getQuantity());
+    //     if(updated==true){
+    //         return ResponseEntity.status(HttpStatus.OK).body(item);
+    //     }
+    //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    // }
 }

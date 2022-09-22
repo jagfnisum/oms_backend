@@ -8,8 +8,8 @@ import javax.persistence.Table;
 @Entity
 public class OrderItems {
     @Id
-    private int orderitemid; //This is not the actual order item id, it is just used as a key   
-    private int orderid,quantity;
+    private int order_item_id; //This is not the actual order item id, it is just used as a key   
+    private int order_id, quantity;
     private String upc;
 
 
@@ -26,26 +26,26 @@ public class OrderItems {
      * @param upc 
      */
     public OrderItems(int orderitemid, int orderid, int quantity, String upc) {
-        this.orderitemid = orderitemid;
-        this.orderid = orderid;
+        this.order_item_id = orderitemid;
+        this.order_id = orderid;
         this.quantity = quantity;
         this.upc = upc;
     }
 
     public int getOrderItemid() {
-        return this.orderitemid;
+        return this.order_item_id;
     }
 
     public void setOrderItemid(int orderitemid) {
-        this.orderitemid = orderitemid;
+        this.order_item_id = orderitemid;
     }
 
     public int getOrderid() {
-        return this.orderid;
+        return this.order_id;
     }
 
     public void setOrderid(int orderid) {
-        this.orderid = orderid;
+        this.order_id = orderid;
     }
 
     public int getQuantity() {
