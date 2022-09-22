@@ -24,21 +24,31 @@ public class OrderServiceImpl implements OrderService {
             LocalDateTime now = LocalDateTime.now();
             switch (status) {
                 case "Shipped":
-                    exists.get().setDateShipped(dtf.format(now));
-                    exists.get().setOrderStatus(status);
-                    repo.save(exists.get());
-                    return true;
+                    if (exists.get().getOrderStatus().equals("Ordered")) {
+                        exists.get().setDateShipped(dtf.format(now));
+                        exists.get().setOrderStatus(status);
+                        repo.save(exists.get());
+                        return true;
+                    }
+                    return false;
 
                 case "Delivered":
-                    exists.get().setDateDelivered(dtf.format(now));
-                    exists.get().setOrderStatus(status);
-                    repo.save(exists.get());
-                    return true;
+                    if (exists.get().getOrderStatus().equals("Shipped")) {
+                        exists.get().setDateDelivered(dtf.format(now));
+                        exists.get().setOrderStatus(status);
+                        repo.save(exists.get());
+                        return true;
+                    }
+                    return false;
 
                 case "Canceled":
-                    exists.get().setOrderStatus(status);
-                    repo.save(exists.get());
-                    return true;
+                    if (exists.get().getOrderStatus().equals("Ordered")) {
+                        System.out.println(exists.get().getOrderStatus());
+                        exists.get().setOrderStatus(status);
+                        repo.save(exists.get());
+                        return true;
+                    }
+                    return false;
 
                 default:
                     return false;

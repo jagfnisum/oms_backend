@@ -65,8 +65,12 @@ public class OrderController {
     }
 
     @GetMapping("/getOrders")
-    public List<Order> getOrders(){
-        return service.getOrders();
+    public ResponseEntity<List<Order>> getOrders(){
+        List<Order> orders = service.getOrders();
+        if (orders.size() > 0){
+            return ResponseEntity.status(HttpStatus.OK).body(orders);
+        }
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
     
     @PostMapping("/createOrder")
