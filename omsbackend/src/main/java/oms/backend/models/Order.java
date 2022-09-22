@@ -19,10 +19,10 @@ public class Order {
     String order_status;
 
     public String getDateOrdered() {
-        return date_delivered;
+        return date_ordered;
     }
     public void setDateOrdered(String dateOrdered) {
-        date_delivered = dateOrdered;
+        this.date_ordered = dateOrdered;
     }
     public int getOrderID() {
         return order_id;
