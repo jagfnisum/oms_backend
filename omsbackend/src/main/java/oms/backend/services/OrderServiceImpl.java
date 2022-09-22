@@ -2,6 +2,7 @@ package oms.backend.services;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,4 +79,19 @@ public class OrderServiceImpl implements OrderService {
 			return false;
 		}		
 	}
+    @Override
+    public List<Order> getOrdersUserId(int id) {
+        List<Order> orders = new ArrayList<Order>();
+        List<Order> exist = repo.findAll();
+        if(exist.isEmpty()){
+            return exist;
+        }else{
+            for(Order order:exist){
+                if(order.getUserId()==id){
+                    orders.add(order);
+                }
+            }
+        }
+        return orders;
+    }
 }

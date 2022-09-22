@@ -72,6 +72,15 @@ public class OrderController {
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+
+    @GetMapping("/getOrders/user/{id}")
+    public ResponseEntity<List<Order>> getOrderInfo(@PathVariable("id") int id) {
+        List<Order> orders=service.getOrdersUserId(id);
+        if(orders.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(orders);
+    }
     
     @PostMapping("/createOrder")
     public ResponseEntity<String> createOrder(@RequestBody Order order){
