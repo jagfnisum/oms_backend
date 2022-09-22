@@ -98,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
      */
 	@Override
 	public boolean createOrder(Order order) {
-		order.setOrderStatus("PENDING");
+		order.setOrderStatus("Pending");
 		Order newlyCreatedOrder = repo.save(order);
 		if(newlyCreatedOrder != null) {
 			return true;
