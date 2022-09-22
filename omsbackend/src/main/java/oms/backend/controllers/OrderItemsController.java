@@ -1,18 +1,16 @@
 package oms.backend.controllers;
 
 import java.util.List;
+
+import oms.backend.models.Order;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import oms.backend.models.OrderItems;
 import oms.backend.services.OrderItemsSerivce;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RequestMapping("api/order/items")
 @RestController
@@ -86,4 +84,29 @@ public class OrderItemsController {
     //     }
     //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     // }
+
+
+
+
+    /**
+     * A method that adds a new order item to our orderitems database
+     * * Example Postman Entry
+     * {
+     *     "orderid":16,
+     *     "quantity":17,
+     *     "orderItemid":12,
+     *     "upc":"101010001111"
+     * }
+     * @param item An item to be added to the database
+     * @return A status that specifies whether or not the item was
+     * successfully added to the database
+     */
+    @PostMapping("/insert")
+    public ResponseEntity<OrderItems> insertNewOrderItem(@RequestBody OrderItems item) {
+        boolean inserted = service.addOrderItem(item);
+        if (inserted) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(item);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
 }

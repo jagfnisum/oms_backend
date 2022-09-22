@@ -2,6 +2,8 @@ package oms.backend.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +62,22 @@ public class OrderItemsServiceImpl implements OrderItemsSerivce{
             }
         }
         return false;
+    }
+
+    /**
+     * This is a method that takes in a new item and adds it to the database
+     * IF it doesn't already exist
+     * @param item A new item to be added to the database
+     * @return boolean(true,false) depending on whether or not the action was successful
+     */
+    @Override
+    public boolean addOrderItem(OrderItems item) {
+        Optional<OrderItems> doesItemExist = repo.findById(item.getOrderItemid());
+        if (doesItemExist.isPresent()) {
+            return false;
+        }
+        repo.save(item);
+        return true;
     }
 
 }
