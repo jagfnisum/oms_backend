@@ -1,6 +1,7 @@
 package oms.backend.oms_backend;
 
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 import static io.restassured.RestAssured.when;
 
@@ -69,6 +72,7 @@ public class TestGetOrders {
 
     @Test
     void getAllOrder() {
+        ArrayList<Integer> orderId = new ArrayList<Integer>();
         log.debug("Testing get all order");
         response =  when().
                 get("getOrders/").
@@ -76,6 +80,14 @@ public class TestGetOrders {
                 extract().response();
         int statusCode = response.getStatusCode();
         log.info("Then the status code = " +statusCode);
+
+        JsonPath jsonPath = response.jsonPath();
+        orderId = jsonPath.get("orderID");
+
+        log.info("List of order id: " + jsonPath.get("orderID"));
+        log.info("List of order status: " + jsonPath.get("orderStatus"));
+        // Assert
         Assertions.assertEquals(200, statusCode);
+        Assertions.assertTrue(orderId.contains(1));
     }
 }
