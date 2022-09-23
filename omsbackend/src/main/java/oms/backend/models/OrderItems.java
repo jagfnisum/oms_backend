@@ -1,13 +1,12 @@
 package oms.backend.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name="order_items")
 @Entity
 public class OrderItems {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int order_item_id; //This is not the actual order item id, it is just used as a key   
     private int order_id, quantity;
     private String upc;
