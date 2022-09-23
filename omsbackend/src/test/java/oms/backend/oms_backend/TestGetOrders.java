@@ -3,14 +3,14 @@ package oms.backend.oms_backend;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import oms.backend.models.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -30,6 +30,8 @@ public class TestGetOrders {
 
     private String path = "/api/order/";
 
+    private Order order;
+
     @BeforeAll
     public static void setUp() {
         log.info("Setting url = \"http://localhost:\"");
@@ -40,15 +42,17 @@ public class TestGetOrders {
     void setupUrl() {
         RestAssured.baseURI = url + port;
         RestAssured.basePath = path;
+        order = new Order();
     }
 
     @Test
     void testGetWithInvalidOrderId() {
         log.debug("Testing GET Method with invalid order id");
-        orderId = 999;
-        log.info("Setting order ID = " + orderId);
+        Order order = new Order();
+        order.setOrderID(999);
+        log.info("Setting order ID = " + order.getOrderID());
         response =  when().
-                get("getOrders/" + String.valueOf(orderId)).
+                get("getOrders/" + String.valueOf(order.getOrderID())).
                 then().
                 extract().response();
         int statusCode = response.getStatusCode();
@@ -59,15 +63,21 @@ public class TestGetOrders {
     @Test
     void testGetOrderById() {
         log.debug("Testing GET Method with valid order id");
-        orderId = 1;
-        log.info("Setting order ID = " + orderId);
+
+        order.setOrderID(1);
+        log.info("Set order ID = " + order.getOrderID());
         response =  when().
-                get("getOrders/" + String.valueOf(orderId)).
+                get("getOrders/" + String.valueOf(order.getOrderID())).
                 then().
                 extract().response();
         int statusCode = response.getStatusCode();
-        log.info("Then the status code = " +statusCode);
+        log.info("Then the status code = " + statusCode);
+
+        JsonPath jsonPath = response.jsonPath();
+        int actualOrderId = jsonPath.get("orderID");
+
         Assertions.assertEquals(200, statusCode);
+        Assertions.assertEquals(order.getOrderID(),actualOrderId);
     }
 
     @Test
@@ -79,7 +89,7 @@ public class TestGetOrders {
                 then().
                 extract().response();
         int statusCode = response.getStatusCode();
-        log.info("Thenn the status code = " +statusCode);
+        log.info("Then the status code = " +statusCode);
 
         JsonPath jsonPath = response.jsonPath();
         orderId = jsonPath.get("orderID");

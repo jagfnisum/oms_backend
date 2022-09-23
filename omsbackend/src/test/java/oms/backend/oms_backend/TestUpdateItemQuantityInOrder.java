@@ -2,6 +2,7 @@ package oms.backend.oms_backend;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import oms.backend.models.OrderItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -16,13 +17,10 @@ public class TestUpdateItemQuantityInOrder {
     private final static Logger log = LogManager.getLogger(TestGetOrders.class);
 
     private static Integer port = 8080;
-
-    private Integer orderId;
-    private String upc;
-    private Integer updatedQuantity;
     private String url = "http://localhost:";
 
     private String path = "/api/order/items/";
+    private OrderItems orderItems;
 
     @BeforeAll
     public static void setUp() {
@@ -34,28 +32,28 @@ public class TestUpdateItemQuantityInOrder {
     void setupUrl() {
         RestAssured.baseURI = url + port;
         RestAssured.basePath = path;
+        orderItems = new OrderItems();
     }
 
     @Test
     void testUpdateQuantityInOrderWithValidOrderID() {
         log.debug("Testing Update Quantity In Order With Valid Order ID");
 
-        orderId = 10;
-        log.info("Set order ID = " + orderId);
+        orderItems.setOrderid(10);
+        log.info("Set order ID = " + orderItems.getOrderid());
 
-        upc = "100000111111";
-        log.info("Set upc = " + orderId);
+        orderItems.setUpc("100000111111");
+        log.info("Set upc = " + orderItems.getUpc());
 
-        updatedQuantity = 19;
-        log.info("Set expected update quantity = " + updatedQuantity);
-
+        orderItems.setQuantity(20);
+        log.info("Set expected update quantity = " + orderItems.getQuantity());
         response =  when().
-                patch("updateItemQuantity/" + String.valueOf(orderId) + "/" + upc + "/" + String.valueOf(updatedQuantity)).
+                patch("updateItemQuantity/" + orderItems.getOrderid() + "/" + orderItems.getUpc() + "/" + orderItems.getQuantity()).
                 then().
                 extract().response();
         int statusCode = response.getStatusCode();
 
-        String expectedResponseBody = "Item " + upc + " updated to " + updatedQuantity;
+        String expectedResponseBody = "Item " + orderItems.getUpc() + " updated to " + orderItems.getQuantity();
         String actualResponseBody = response.getBody().prettyPrint();
 
         log.info("Then the status code = " + statusCode);
@@ -68,17 +66,17 @@ public class TestUpdateItemQuantityInOrder {
     void testUpdateQuantityInOrderWithInvalidOrderID() {
         log.debug("Testing Update Quantity In Order With Valid Order ID");
 
-        orderId = 9999;
-        log.info("Set order ID = " + orderId);
+        orderItems.setOrderid(9999);
+        log.info("Set order ID = " + orderItems.getOrderid());
 
-        upc = "100000111111";
-        log.info("Set upc = " + orderId);
+        orderItems.setUpc("100000111111");
+        log.info("Set upc = " + orderItems.getUpc());
 
-        updatedQuantity = 19;
-        log.info("Set expected update quantity = " + updatedQuantity);
+        orderItems.setQuantity(20);
+        log.info("Set expected update quantity = " + orderItems.getQuantity());
 
         response =  when().
-                patch("updateItemQuantity/" + String.valueOf(orderId) + "/" + upc + "/" + String.valueOf(updatedQuantity)).
+                patch("updateItemQuantity/" + orderItems.getOrderid()+ "/" + orderItems.getUpc() + "/" + orderItems.getQuantity()).
                 then().
                 extract().response();
         int statusCode = response.getStatusCode();
@@ -86,4 +84,5 @@ public class TestUpdateItemQuantityInOrder {
         log.info("Then the status code = " + statusCode);
         Assertions.assertEquals(400, statusCode);
     }
+
 }
