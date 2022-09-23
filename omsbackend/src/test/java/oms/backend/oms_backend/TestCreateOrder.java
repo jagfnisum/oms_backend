@@ -1,22 +1,17 @@
 package oms.backend.oms_backend;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.json.JSONException;
-import org.json.JSONObject;
+import oms.backend.models.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-
-import static io.restassured.RestAssured.when;
 
 @SpringBootTest
 public class TestCreateOrder {
@@ -30,6 +25,10 @@ public class TestCreateOrder {
 
     private String path = "/api/order/";
 
+    private ObjectMapper objectMapper;
+
+    private Order order;
+
     @BeforeAll
     public static void setUp() {
         log.info("Setting url = http://localhost/");
@@ -40,27 +39,30 @@ public class TestCreateOrder {
     void setupUrl() {
         RestAssured.baseURI = url + port;
         RestAssured.basePath = path;
+        order = new Order();
     }
 
     @Test
-    void testCreateOrder() throws JSONException {
+    void testCreateOrder() throws Exception {
         log.debug("Testing Post Method with creating new orders");
 
-        JSONObject newOrder = new JSONObject();
+        order.setPrice(180);
+        order.setOrderStatus("Pending");
+        order.setDateShipped("2011-12-18 13:17:17");
+        order.setUserId(3);
+        order.setDateOrdered("2011-12-18 13:17:17");
+        order.setOrderID(23);
+        order.setAddressID(1);
+        order.setCreditCardID(7);
 
-        newOrder.put("price",180.0);
-        newOrder.put("orderStatus", null);
-        newOrder.put("dateShipped", null);
-        newOrder.put("dateDelivered", null);
-        newOrder.put("userId", 3);
-        newOrder.put("dateOrdered", "2011-12-18 13:17:17");
-        newOrder.put("orderID", 36);
-        newOrder.put("addressID", 1);
-        newOrder.put("creditCardID", 7);
+        objectMapper = new ObjectMapper();
+        String newOrder = objectMapper.writeValueAsString(order);
+        System.out.println(newOrder);
+
         response =  RestAssured.
                 given().
                 contentType("application/json").
-                body(newOrder.toString()).
+                body(newOrder).
                 when().
                 post("createOrder");
 
