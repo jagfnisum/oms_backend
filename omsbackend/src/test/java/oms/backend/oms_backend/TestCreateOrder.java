@@ -46,16 +46,15 @@ public class TestCreateOrder {
     void testCreateOrder() throws JSONException {
         log.debug("Testing Post Method with creating new orders");
 
-
         JSONObject newOrder = new JSONObject();
 
         newOrder.put("price",180.0);
         newOrder.put("orderStatus", null);
-        newOrder.put("dateShipped", "2011-12-18 13:17:17");
+        newOrder.put("dateShipped", null);
         newOrder.put("dateDelivered", null);
         newOrder.put("userId", 3);
         newOrder.put("dateOrdered", "2011-12-18 13:17:17");
-        newOrder.put("orderID", 17);
+        newOrder.put("orderID", 36);
         newOrder.put("addressID", 1);
         newOrder.put("creditCardID", 7);
         response =  RestAssured.
