@@ -17,8 +17,7 @@ import javax.persistence.Table;
 @Entity
 public class Order {
     @Id
-//    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "orderid_generator")
-//	@SequenceGenerator(name="orderid_generator", sequenceName = "order_seq")	
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer order_id;
     int user_id;
     int address_id;
@@ -30,10 +29,16 @@ public class Order {
     String order_status;
     
     @OneToMany(targetEntity = OrderItems.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    @JoinColumn(referencedColumnName = "order_id")
     List<OrderItems> orderItems;
 
-    public String getDateOrdered() {
+    public List<OrderItems> getOrderItems() {
+		return orderItems;
+	}
+	public void setOrderItems(List<OrderItems> orderItems) {
+		this.orderItems = orderItems;
+	}
+	public String getDateOrdered() {
         return date_ordered;
     }
     public void setDateOrdered(String dateOrdered) {

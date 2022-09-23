@@ -1,24 +1,20 @@
 package oms.backend.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name="order_items")
 @Entity
 public class OrderItems {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int order_item_id; //This is not the actual order item id, it is just used as a key   
     private int order_id, quantity;
     private String upc;
     
-    @ManyToOne(targetEntity = Order.class, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "order_id", referencedColumnName = "order_item_id")
-    private Order order;
-
     /**
      * Default constructor for OrderItems
      */
@@ -48,7 +44,6 @@ public class OrderItems {
 
     public int getOrderid() {
         return this.order_id;
-//    	return order.getOrderID();
     }
 
     public void setOrderid(int orderid) {
