@@ -1,14 +1,19 @@
 package oms.backend.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Table(name = "Orders")
 @Entity
 public class Order {
     @Id
-    int order_id;
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "orderid_generator")
+	@SequenceGenerator(name="orderid_generator", sequenceName = "order_seq")	
+    Integer order_id;
     int user_id;
     int address_id;
     float price;
@@ -24,10 +29,10 @@ public class Order {
     public void setDateOrdered(String dateOrdered) {
         this.date_ordered = dateOrdered;
     }
-    public int getOrderID() {
+    public Integer getOrderID() {
         return order_id;
     }
-    public void setOrderID(int orderID) {
+    public void setOrderID(Integer orderID) {
         this.order_id = orderID;
     }
     public int getUserId() {

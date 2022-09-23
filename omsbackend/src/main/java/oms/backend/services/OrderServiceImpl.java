@@ -97,8 +97,13 @@ public class OrderServiceImpl implements OrderService {
      * new order was able to created
      */
 	@Override
-	public boolean createOrder(Order order) {
-		order.setOrderStatus("Pending");
+	public boolean createOrder(Order order) {		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();       
+        order.setDateOrdered(dtf.format(now));
+        order.setOrderStatus("Pending");
+		order.setDateDelivered(null);
+		order.setDateShipped(null);		
 		Order newlyCreatedOrder = repo.save(order);
 		if(newlyCreatedOrder != null) {
 			return true;
