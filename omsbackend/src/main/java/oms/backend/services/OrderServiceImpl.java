@@ -104,6 +104,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderStatus("Pending");
 		order.setDateDelivered(null);
 		order.setDateShipped(null);		
+		System.out.println(order);
 		Order newlyCreatedOrder = repo.save(order);
 		if(newlyCreatedOrder != null) {
 			return true;

@@ -1,9 +1,15 @@
 package oms.backend.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -11,8 +17,8 @@ import javax.persistence.Table;
 @Entity
 public class Order {
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "orderid_generator")
-	@SequenceGenerator(name="orderid_generator", sequenceName = "order_seq")	
+//    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "orderid_generator")
+//	@SequenceGenerator(name="orderid_generator", sequenceName = "order_seq")	
     Integer order_id;
     int user_id;
     int address_id;
@@ -22,6 +28,10 @@ public class Order {
     String date_shipped;
     String date_delivered;
     String order_status;
+    
+    @OneToMany(targetEntity = OrderItems.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    List<OrderItems> orderItems;
 
     public String getDateOrdered() {
         return date_ordered;
@@ -77,4 +87,12 @@ public class Order {
     public void setDateDelivered(String dateDelivered) {
         this.date_delivered = dateDelivered;
     }
+	@Override
+	public String toString() {
+		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", address_id=" + address_id + ", price="
+				+ price + ", credit_card_id=" + credit_card_id + ", date_ordered=" + date_ordered + ", date_shipped="
+				+ date_shipped + ", date_delivered=" + date_delivered + ", order_status=" + order_status
+				+ ", orderItems=" + orderItems + "]";
+	}
+    
 }
