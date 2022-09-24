@@ -1,14 +1,24 @@
 package oms.backend.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Table(name = "Orders")
 @Entity
 public class Order {
     @Id
-    int order_id;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer order_id;
     int user_id;
     int address_id;
     float price;
@@ -17,17 +27,27 @@ public class Order {
     String date_shipped;
     String date_delivered;
     String order_status;
+    
+    @OneToMany(targetEntity = OrderItems.class, cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "order_id")
+    List<OrderItems> orderItems;
 
-    public String getDateOrdered() {
+    public List<OrderItems> getOrderItems() {
+		return orderItems;
+	}
+	public void setOrderItems(List<OrderItems> orderItems) {
+		this.orderItems = orderItems;
+	}
+	public String getDateOrdered() {
         return date_ordered;
     }
     public void setDateOrdered(String dateOrdered) {
         this.date_ordered = dateOrdered;
     }
-    public int getOrderID() {
+    public Integer getOrderID() {
         return order_id;
     }
-    public void setOrderID(int orderID) {
+    public void setOrderID(Integer orderID) {
         this.order_id = orderID;
     }
     public int getUserId() {
@@ -72,4 +92,12 @@ public class Order {
     public void setDateDelivered(String dateDelivered) {
         this.date_delivered = dateDelivered;
     }
+	@Override
+	public String toString() {
+		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", address_id=" + address_id + ", price="
+				+ price + ", credit_card_id=" + credit_card_id + ", date_ordered=" + date_ordered + ", date_shipped="
+				+ date_shipped + ", date_delivered=" + date_delivered + ", order_status=" + order_status
+				+ ", orderItems=" + orderItems + "]";
+	}
+    
 }
