@@ -34,6 +34,15 @@ public class OrderServiceImpl implements OrderService {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             switch (status) {
+                case "Ordered":
+                    if (exists.get().getOrderStatus().equals("Pending")){
+                        exists.get().setDateOrdered(dtf.format(now));
+                        exists.get().setOrderStatus(status);
+                        repo.save(exists.get());
+                        return true;
+                    }
+                    return false;
+
                 case "Shipped":
                     if (exists.get().getOrderStatus().equals("Ordered")) {
                         exists.get().setDateShipped(dtf.format(now));
