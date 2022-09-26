@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Table(name = "Orders")
+@Table(name = "orders")
 @Entity
 public class Order {
     @Id
@@ -28,8 +28,10 @@ public class Order {
     String date_delivered;
     String order_status;
     
-    @OneToMany(targetEntity = OrderItems.class, cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "order_id")
+//    @OneToMany(targetEntity = OrderItems.class, cascade = CascadeType.ALL)
+//    @JoinColumn(referencedColumnName = "order_id")
+    
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<OrderItems> orderItems;
 
     public List<OrderItems> getOrderItems() {
