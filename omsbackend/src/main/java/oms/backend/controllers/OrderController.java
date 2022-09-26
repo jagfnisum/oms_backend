@@ -128,6 +128,7 @@ public class OrderController {
     /**
      * This method allows the user to create an order and add it to the database.
      * @param order An order item that will be added to our database
+     * request body should have followings: {}
      * @return a response entity that specifies if the order is created. If not,
      * we return a bad request
      */

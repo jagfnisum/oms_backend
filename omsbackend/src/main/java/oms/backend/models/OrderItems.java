@@ -1,9 +1,12 @@
 package oms.backend.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name="order_items")
@@ -14,6 +17,11 @@ public class OrderItems {
     private int order_item_id; //This is not the actual order item id, it is just used as a key   
     private int order_id, quantity;
     private String upc;
+    
+//    @ManyToOne(targetEntity = Order.class, cascade = CascadeType.ALL)
+//    @ManyToOne
+//    @JoinColumn(name = "order_id")
+//    private Order order;
     
     /**
      * Default constructor for OrderItems
