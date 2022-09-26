@@ -68,8 +68,7 @@ public class OrderItemsController {
      * {
             "orderid": 6,
             "quantity": 10,
-            "upc": "100000001111",
-            "order_itemid": 1
+            "upc": "100000001111"
         }
      * @param item An item to be updated
      * @return A status that specifies whether or not the item
@@ -94,7 +93,6 @@ public class OrderItemsController {
      * {
      *     "orderid":16,
      *     "quantity":17,
-     *     "orderItemid":12,
      *     "upc":"101010001111"
      * }
      * @param item An item to be added to the database

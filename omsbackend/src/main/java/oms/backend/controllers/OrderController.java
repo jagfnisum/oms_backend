@@ -62,6 +62,16 @@ public class OrderController {
         }
     }
 
+    @PutMapping("/updateOrder/ordered/{id}")
+    public ResponseEntity<String> orderedOrder(@PathVariable("id") int id){
+        boolean success = service.updateOrder(id, "Ordered");
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).body(id + " Ordered successfully");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
     /**
      * This method takes in an integer id and lets us update the order to be
      * labeled as delivered
