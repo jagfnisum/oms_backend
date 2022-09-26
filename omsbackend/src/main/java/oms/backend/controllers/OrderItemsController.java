@@ -39,6 +39,9 @@ public class OrderItemsController {
      * rather than PutMapping. Please note that you are not able to patch
      * via the browser url, you must use a tool such as postman in order to patch
      * 
+     * Postman Requestbody: simply enter the amount you want to update
+     * 
+     * 
      * A method to update an item's quantity within an order
      * @param orderid the id of the order to be updated
      * @param upc the product id of the product to be udpated
@@ -47,9 +50,9 @@ public class OrderItemsController {
      * able to update the item in the database. If not, we will return a 
      * bad request http status
      */
-    @PatchMapping("/updateItemQuantity/{orderid}/{upc}/{updatedQuantity}")
+    @PatchMapping("/updateItemQuantity/{orderid}/{upc}")
     public ResponseEntity<String> updateItem(@PathVariable("orderid") int orderid,
-     @PathVariable("upc") String upc, @PathVariable("updatedQuantity") int updatedQuantity){
+     @PathVariable("upc") String upc, @RequestBody int updatedQuantity){
         boolean updated = service.updateOrderItem(orderid, upc, updatedQuantity);
         if(updated){
             return ResponseEntity.status(HttpStatus.OK).body("Item "+upc+" updated to "+ updatedQuantity);
