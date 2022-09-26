@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 public class Order {
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer order_id;
     int user_id;
     int address_id;
@@ -28,8 +28,7 @@ public class Order {
     String date_delivered;
     String order_status;
     
-    @OneToMany(targetEntity = OrderItems.class, cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "order_id")
+    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
     List<OrderItems> orderItems;
 
     public List<OrderItems> getOrderItems() {
@@ -47,8 +46,8 @@ public class Order {
     public Integer getOrderID() {
         return order_id;
     }
-    public void setOrderID(Integer orderID) {
-        this.order_id = orderID;
+    public void setOrderID(Integer orderid) {
+        this.order_id = orderid;
     }
     public int getUserId() {
         return user_id;
@@ -97,7 +96,8 @@ public class Order {
 		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", address_id=" + address_id + ", price="
 				+ price + ", credit_card_id=" + credit_card_id + ", date_ordered=" + date_ordered + ", date_shipped="
 				+ date_shipped + ", date_delivered=" + date_delivered + ", order_status=" + order_status
-				+ ", orderItems=" + orderItems + "]";
+				+ ", orderItems=" + orderItems 
+				+ "]";
 	}
     
 }
