@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import static io.restassured.RestAssured.when;
 
+/** Create 3 new orders with id 34, 35, 36 before the test **/
 @SpringBootTest
 public class TestUpdateStatus {
 
