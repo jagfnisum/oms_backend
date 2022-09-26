@@ -43,8 +43,8 @@ public class TestGetOrderUsingMockMvc {
 
         List<Order> orderList = new ArrayList<>();
 
-        Order order1 = new Order(1,1,1,10,1,"2011-12-18 13:17:17","2011-12-18 13:17:17", null);
-        Order order2 = new Order(2,2,2,20,2,"2011-12-18 13:17:17","2011-12-18 13:17:17", null);
+        Order order1 = new Order(1,1,1,10,1,"2011-12-18 13:17:17","2011-12-18 13:17:17", "Cancelled");
+        Order order2 = new Order(2,2,2,20,2,"2011-12-18 13:17:17","2011-12-18 13:17:17", "Delivered");
 
         orderList.add(order1);
         orderList.add(order2);
@@ -67,7 +67,7 @@ public class TestGetOrderUsingMockMvc {
 
     @Test
     void testGetOrderByValidId() throws Exception {
-        Order order1 = new Order(1,1,1,10,1,"2011-12-18 13:17:17","2011-12-18 13:17:17", null);
+        Order order1 = new Order(1,1,1,10,1,"2011-12-18 13:17:17","2011-12-18 13:17:17", "Cancelled");
 
         Mockito.when(orderService.getOrderById(1)).thenReturn(Optional.of(order1));
 
