@@ -1,7 +1,6 @@
-package oms.backend.oms_backend;
+package oms.backend.oms_backend.test_using_restassured;
 
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import oms.backend.models.Order;
 import org.apache.logging.log4j.LogManager;
@@ -12,9 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static io.restassured.RestAssured.when;
 

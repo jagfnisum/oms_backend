@@ -1,5 +1,7 @@
 package oms.backend.models;
 
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+@Data
+@NoArgsConstructor
 @Table(name = "Orders")
 @Entity
 public class Order {
@@ -32,6 +36,18 @@ public class Order {
     @JoinColumn(referencedColumnName = "order_id")
     List<OrderItems> orderItems;
 
+    public Order(int order_id, int user_id, int address_id, int price, int credit_card_id, String date_ordered, String date_shipped, String date_delivered, String order_status) {
+        this.order_id = order_id;
+        this.user_id = user_id;
+        this.address_id = address_id;
+        this.price = price;
+        this.credit_card_id = credit_card_id;
+        this.date_ordered = date_ordered;
+        this.date_shipped = date_shipped;
+        this.date_delivered = date_delivered;
+        this.order_status = order_status;
+
+    }
     public List<OrderItems> getOrderItems() {
 		return orderItems;
 	}
