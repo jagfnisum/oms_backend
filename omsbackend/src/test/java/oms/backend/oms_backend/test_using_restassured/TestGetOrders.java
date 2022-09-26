@@ -1,4 +1,4 @@
-package oms.backend.oms_backend;
+package oms.backend.oms_backend.test_using_restassured;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;

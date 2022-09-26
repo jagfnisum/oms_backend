@@ -1,10 +1,9 @@
-package oms.backend.oms_backend;
+package oms.backend.oms_backend.test_using_restassured;
 
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import oms.backend.oms_backend.test_using_restassured.TestGetOrders;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,10 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-
-import static io.restassured.RestAssured.when;
 
 /** Create 3 new orders with id 34, 35, 36 before the test **/
 @SpringBootTest
