@@ -3,7 +3,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import oms.backend.models.OrderItems;
-import oms.backend.oms_backend.test_using_restassured.TestGetOrders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;

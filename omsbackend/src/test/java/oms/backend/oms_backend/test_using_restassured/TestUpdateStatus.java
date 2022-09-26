@@ -2,7 +2,6 @@ package oms.backend.oms_backend.test_using_restassured;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import oms.backend.oms_backend.test_using_restassured.TestGetOrders;
 import org.json.JSONException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

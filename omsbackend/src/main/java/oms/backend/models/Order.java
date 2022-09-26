@@ -2,17 +2,13 @@ package oms.backend.models;
 
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Data
@@ -29,14 +25,13 @@ public class Order {
     int credit_card_id;
     String date_ordered;
     String date_shipped;
-    String date_delivered;
     String order_status;
     
     @OneToMany(targetEntity = OrderItems.class, cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "order_id")
     List<OrderItems> orderItems;
 
-    public Order(int order_id, int user_id, int address_id, int price, int credit_card_id, String date_ordered, String date_shipped, String date_delivered, String order_status) {
+    public Order(int order_id, int user_id, int address_id, int price, int credit_card_id, String date_ordered, String date_shipped, String order_status) {
         this.order_id = order_id;
         this.user_id = user_id;
         this.address_id = address_id;
@@ -44,7 +39,6 @@ public class Order {
         this.credit_card_id = credit_card_id;
         this.date_ordered = date_ordered;
         this.date_shipped = date_shipped;
-        this.date_delivered = date_delivered;
         this.order_status = order_status;
 
     }
@@ -102,17 +96,11 @@ public class Order {
     public void setDateShipped(String dateShipped) {
         this.date_shipped = dateShipped;
     }
-    public String getDateDelivered() {
-        return date_delivered;
-    }
-    public void setDateDelivered(String dateDelivered) {
-        this.date_delivered = dateDelivered;
-    }
 	@Override
 	public String toString() {
 		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", address_id=" + address_id + ", price="
 				+ price + ", credit_card_id=" + credit_card_id + ", date_ordered=" + date_ordered + ", date_shipped="
-				+ date_shipped + ", date_delivered=" + date_delivered + ", order_status=" + order_status
+				+ date_shipped + ", order_status=" + order_status
 				+ ", orderItems=" + orderItems + "]";
 	}
     

@@ -25,7 +25,6 @@ public class TestGetOrders {
 
     private static Integer port = 8080;
 
-    private Integer orderId;
     private String url = "http://localhost:";
 
     private String path = "/api/order/";

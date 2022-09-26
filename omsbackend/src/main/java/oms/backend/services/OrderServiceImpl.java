@@ -34,17 +34,8 @@ public class OrderServiceImpl implements OrderService {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             switch (status) {
-                case "Ordered":
-                    if (exists.get().getOrderStatus().equals("Pending")){
-                        exists.get().setDateOrdered(dtf.format(now));
-                        exists.get().setOrderStatus(status);
-                        repo.save(exists.get());
-                        return true;
-                    }
-                    return false;
-
                 case "Shipped":
-                    if (exists.get().getOrderStatus().equals("Ordered")) {
+                    if (exists.get().getOrderStatus().equals("Pending")) {
                         exists.get().setDateShipped(dtf.format(now));
                         exists.get().setOrderStatus(status);
                         repo.save(exists.get());
@@ -52,18 +43,8 @@ public class OrderServiceImpl implements OrderService {
                     }
                     return false;
 
-                case "Delivered":
-                    if (exists.get().getOrderStatus().equals("Shipped")) {
-                        exists.get().setDateDelivered(dtf.format(now));
-                        exists.get().setOrderStatus(status);
-                        repo.save(exists.get());
-                        return true;
-                    }
-                    return false;
-
                 case "Canceled":
-                    if (exists.get().getOrderStatus().equals("Ordered")) {
-                        System.out.println(exists.get().getOrderStatus());
+                    if (exists.get().getOrderStatus().equals("Pending")) {
                         exists.get().setOrderStatus(status);
                         repo.save(exists.get());
                         return true;
@@ -111,7 +92,6 @@ public class OrderServiceImpl implements OrderService {
         LocalDateTime now = LocalDateTime.now();       
         order.setDateOrdered(dtf.format(now));
         order.setOrderStatus("Pending");
-		order.setDateDelivered(null);
 		order.setDateShipped(null);		
 		System.out.println(order);
 		Order newlyCreatedOrder = repo.save(order);

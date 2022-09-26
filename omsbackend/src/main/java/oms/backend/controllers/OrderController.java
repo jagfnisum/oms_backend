@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.bytebuddy.asm.Advice.Return;
 import oms.backend.models.Order;
 import oms.backend.services.OrderService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
@@ -56,35 +57,6 @@ public class OrderController {
         boolean success = service.updateOrder(id, "Canceled");
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).body(id + " Cancelled successfully");
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-    }
-
-    @PutMapping("/updateOrder/ordered/{id}")
-    public ResponseEntity<String> orderedOrder(@PathVariable("id") int id){
-        boolean success = service.updateOrder(id, "Ordered");
-        if (success) {
-            return ResponseEntity.status(HttpStatus.OK).body(id + " Ordered successfully");
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-    }
-    /**
-     * This method takes in an integer id and lets us update the order to be
-     * labeled as delivered
-     * @param id an integer that represents the id of the order we want to be laveled as delivered
-     * @return This method returns a response entity in the form a 
-     * string that specifies the order id number and if it has been delivered
-     * successfully. If not, we return a bad request.
-     */
-    @PutMapping("/updateOrder/delivered/{id}")
-    public ResponseEntity<String> deliveredOrder(@PathVariable("id") int id) {
-        boolean success = service.updateOrder(id, "Delivered");
-        if (success) {
-            return ResponseEntity.status(HttpStatus.OK).body(id + " Delivered successfully");
         }
         else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
