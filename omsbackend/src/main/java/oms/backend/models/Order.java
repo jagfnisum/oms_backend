@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 public class Order {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer order_id;
     int user_id;
     int address_id;
