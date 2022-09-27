@@ -3,7 +3,10 @@ package oms.backend.oms_backend.test_using_restassured;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import net.minidev.json.JSONObject;
 import oms.backend.models.Order;
+import oms.backend.models.OrderItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +14,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootTest
@@ -46,25 +52,30 @@ public class TestCreateOrder {
     void testCreateOrder() throws Exception {
         log.debug("Testing Post Method with creating new orders");
 
-        order.setPrice(180);
-        order.setOrderStatus("Pending");
-        order.setDateShipped("2011-12-18 13:17:17");
-        order.setUserId(3);
-        order.setDateOrdered("2011-12-18 13:17:17");
-        order.setOrderID(23);
-        order.setAddressID(1);
-        order.setCreditCardID(7);
+        JSONObject newOrder = new JSONObject();
+        JSONObject orderItem1 = new JSONObject();
+        JSONObject orderItem2 = new JSONObject();
 
-        objectMapper = new ObjectMapper();
-        String newOrder = objectMapper.writeValueAsString(order);
-        System.out.println(newOrder);
+        newOrder.put("price", 1000);
+        newOrder.put("userId", 4);
+        newOrder.put("addressID", 4);
+        newOrder.put("creditCardID", 4);
+        newOrder.put("orderItems", 4);
+
+        orderItem1.put("quantity", 20);
+        orderItem1.put("upc", "100001111111");
+
+        orderItem2.put("quantity", 30);
+        orderItem2.put("upc", "100011111111");
+        newOrder.put("orderItems", new JSONObject[]{orderItem1, orderItem2});
+
 
         response =  RestAssured.
                 given().
                 contentType("application/json").
-                body(newOrder).
+                body(newOrder.toString()).
                 when().
-                post("createOrder");
+                post("/createOrder");
 
         log.info("Print response body");
         System.out.println(response.body().prettyPrint());
@@ -73,7 +84,4 @@ public class TestCreateOrder {
         log.info("The the status code = " + statusCode);
         Assertions.assertEquals(201, statusCode);
     }
-
-
-
 }
