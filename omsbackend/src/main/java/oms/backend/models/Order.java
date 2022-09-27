@@ -24,6 +24,9 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<OrderItems> orderItems;
 
+    public Order() {
+    	
+    }
 
     public Order(int order_id, int user_id, int address_id, int price, int credit_card_id, String date_ordered, String date_shipped, String order_status) {
         this.order_id = order_id;
