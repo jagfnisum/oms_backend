@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Data
 @NoArgsConstructor
 @Table(name = "Orders")
 @Entity
