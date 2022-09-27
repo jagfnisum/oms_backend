@@ -2,20 +2,31 @@ package oms.backend.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Table(name="order_items")
 @Entity
 public class OrderItems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int order_item_id; //This is not the actual order item id, it is just used as a key   
-    private int order_id, quantity;
+    private int quantity;
     private String upc;
     
-    /**
+  
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name="order_id")
+    Order order;
+    
+    
+	/**
      * Default constructor for OrderItems
      */
     public OrderItems() {
     }
+    
     /**
      * Constructor with all class fields
      * @param orderitemid
@@ -23,9 +34,8 @@ public class OrderItems {
      * @param quantity
      * @param upc 
      */
-    public OrderItems(int orderitemid, int orderid, int quantity, String upc) {
+    public OrderItems(int orderitemid, int quantity, String upc) {
         this.order_item_id = orderitemid;
-        this.order_id = orderid;
         this.quantity = quantity;
         this.upc = upc;
     }
@@ -38,13 +48,6 @@ public class OrderItems {
         this.order_item_id = orderitemid;
     }
 
-    public int getOrderid() {
-        return this.order_id;
-    }
-
-    public void setOrderid(int orderid) {
-        this.order_id = orderid;
-    }
 
     public int getQuantity() {
         return this.quantity;
@@ -61,15 +64,24 @@ public class OrderItems {
     public void setUpc(String upc) {
         this.upc = upc;
     }
+    
+    public Order getOrder() {
+		return order;
+	}
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 
     @Override
     public String toString() {
         return "{" +
             " orderitemid='" + getOrderItemid() + "'" +
-            ", orderid='" + getOrderid() + "'" +
+            ", orderid='" + this.getOrder().getOrderID() + "'" +
             ", quantity='" + getQuantity() + "'" +
             ", upc='" + getUpc() + "'" +
             "}";
     }
+    
+    
 
 }

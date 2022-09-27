@@ -63,6 +63,16 @@ public class OrderController {
         }
     }
 
+    @PutMapping("/updateOrder/ordered/{id}")
+    public ResponseEntity<String> orderedOrder(@PathVariable("id") int id){
+        boolean success = service.updateOrder(id, "Ordered");
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).body(id + " Ordered successfully");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
     /**
      * This method gets orders with the specified id
      * @param id an integer that represents the id of the order we want to view
@@ -110,6 +120,7 @@ public class OrderController {
     /**
      * This method allows the user to create an order and add it to the database.
      * @param order An order item that will be added to our database
+     * request body should have followings: {}
      * @return a response entity that specifies if the order is created. If not,
      * we return a bad request
      */

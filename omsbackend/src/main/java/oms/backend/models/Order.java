@@ -1,23 +1,17 @@
 package oms.backend.models;
 
 import lombok.*;
-
 import java.util.List;
+import javax.persistence.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @NoArgsConstructor
 @Table(name = "Orders")
 @Entity
 public class Order {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer order_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int order_id;
     int user_id;
     int address_id;
     float price;
@@ -26,9 +20,12 @@ public class Order {
     String date_shipped;
     String order_status;
     
-    @OneToMany(targetEntity = OrderItems.class, cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "order_id")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<OrderItems> orderItems;
+
+    public Order() {
+    	
+    }
 
     public Order(int order_id, int user_id, int address_id, int price, int credit_card_id, String date_ordered, String date_shipped, String order_status) {
         this.order_id = order_id;
@@ -41,11 +38,15 @@ public class Order {
         this.order_status = order_status;
 
     }
+
     public List<OrderItems> getOrderItems() {
 		return orderItems;
 	}
 	public void setOrderItems(List<OrderItems> orderItems) {
 		this.orderItems = orderItems;
+		for(OrderItems i: this.orderItems) {
+			i.setOrder(this);
+		}
 	}
 	public String getDateOrdered() {
         return date_ordered;
@@ -53,11 +54,11 @@ public class Order {
     public void setDateOrdered(String dateOrdered) {
         this.date_ordered = dateOrdered;
     }
-    public Integer getOrderID() {
+    public int getOrderID() {
         return order_id;
     }
-    public void setOrderID(Integer orderID) {
-        this.order_id = orderID;
+    public void setOrderID(int orderid) {
+        this.order_id = orderid;
     }
     public int getUserId() {
         return user_id;
@@ -95,7 +96,8 @@ public class Order {
     public void setDateShipped(String dateShipped) {
         this.date_shipped = dateShipped;
     }
-	@Override
+
+    @Override
 	public String toString() {
 		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", address_id=" + address_id + ", price="
 				+ price + ", credit_card_id=" + credit_card_id + ", date_ordered=" + date_ordered + ", date_shipped="

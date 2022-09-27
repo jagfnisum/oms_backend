@@ -36,7 +36,7 @@ public class TestUpdateItemQuantityUsingMockMvc {
     public void testUpdateQuantityInOrderWithValidOrderID() throws Exception {
         OrderItems orderItems = new OrderItems(1,6,35,"100000001111");
 
-        int orderId = orderItems.getOrderid();
+        int orderId =  orderItems.getOrder().getOrderID();
         String upc = orderItems.getUpc();
         int expectedUpdateQuantity = 50;
 

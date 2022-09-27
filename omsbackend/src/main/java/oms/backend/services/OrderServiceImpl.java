@@ -16,6 +16,7 @@ import oms.backend.repos.OrderRepo;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepo repo;
+    
 
     /**
      * This method allows us to update the status of an order that
@@ -34,6 +35,15 @@ public class OrderServiceImpl implements OrderService {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             switch (status) {
+                case "Ordered":
+                    if (exists.get().getOrderStatus().equals("Pending")){
+                        exists.get().setDateOrdered(dtf.format(now));
+                        exists.get().setOrderStatus(status);
+                        repo.save(exists.get());
+                        return true;
+                    }
+                    return false;
+
                 case "Shipped":
                     if (exists.get().getOrderStatus().equals("Pending")) {
                         exists.get().setDateShipped(dtf.format(now));
@@ -42,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
                         return true;
                     }
                     return false;
-
+                    
                 case "Canceled":
                     if (exists.get().getOrderStatus().equals("Pending")) {
                         exists.get().setOrderStatus(status);
