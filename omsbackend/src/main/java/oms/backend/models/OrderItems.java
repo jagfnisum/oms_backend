@@ -2,6 +2,7 @@ package oms.backend.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -17,6 +18,7 @@ public class OrderItems {
     
   
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="order_id")
     Order order;
     
