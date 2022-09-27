@@ -40,8 +40,8 @@ public class TestUpdateStatus {
     @Test
     public void TestShippedValid() throws JSONException{
         //pending -> shipped
-        log.debug("Testing GET Method with invalid order id");
-        int orderId = 9;
+        log.debug("Testing GET Method with valid order id");
+        int orderId = 11;
         log.info("Shipping order ID = " + orderId);
         response = RestAssured.given().
                 when().
@@ -57,7 +57,7 @@ public class TestUpdateStatus {
     public  void TestCancelledValid() throws JSONException{
         //pending ->cancelled
         log.debug("Testing GET Method with invalid order id");
-        int orderId = 10;
+        int orderId = 11;
         log.info("Cancelling order ID = " + orderId);
 
         Response response = RestAssured.given().

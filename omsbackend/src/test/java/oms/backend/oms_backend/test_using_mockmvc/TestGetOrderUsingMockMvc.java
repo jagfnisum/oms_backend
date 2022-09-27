@@ -53,10 +53,10 @@ public class TestGetOrderUsingMockMvc {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/order/getOrders").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].order_id", is(1)))
-                .andExpect(jsonPath("$[1].order_id", is(2)))
-                .andExpect(jsonPath("$[0].order_status", is("Cancelled")))
-                .andExpect(jsonPath("$[1].order_status", is("Delivered")));
+                .andExpect(jsonPath("$[0].orderID", is(1)))
+                .andExpect(jsonPath("$[1].orderID", is(2)))
+                .andExpect(jsonPath("$[0].orderStatus", is("Cancelled")))
+                .andExpect(jsonPath("$[1].orderStatus", is("Delivered")));
     }
 
     @Test

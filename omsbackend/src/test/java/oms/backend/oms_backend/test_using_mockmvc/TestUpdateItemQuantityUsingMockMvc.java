@@ -1,6 +1,7 @@
 package oms.backend.oms_backend.test_using_mockmvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import oms.backend.models.Order;
 import oms.backend.models.OrderItems;
 import oms.backend.oms_backend.OmsbackendApplication;
 import oms.backend.services.OrderItemsSerivce;
@@ -34,7 +35,12 @@ public class TestUpdateItemQuantityUsingMockMvc {
 
     @Test
     public void testUpdateQuantityInOrderWithValidOrderID() throws Exception {
-        OrderItems orderItems = new OrderItems(1,6,35,"100000001111");
+
+        OrderItems orderItems = new OrderItems(1,30,"100000001111");
+
+        Order order = new Order();
+        order.setOrderID(6);
+        orderItems.setOrder(order);
 
         int orderId =  orderItems.getOrder().getOrderID();
         String upc = orderItems.getUpc();
@@ -43,7 +49,7 @@ public class TestUpdateItemQuantityUsingMockMvc {
         Mockito.when(orderItemsSerivce.updateOrderItem(orderId, upc, expectedUpdateQuantity)).thenReturn(true);
 
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
-                .patch("/api/order/items/updateItemQuantity/" + orderId + "/" + upc)
+                .patch("/api/order/items/updateItemQuantity/{orderId}/{upc}", orderId, upc)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
                 .content(this.mapper.writeValueAsBytes(expectedUpdateQuantity));
@@ -54,17 +60,20 @@ public class TestUpdateItemQuantityUsingMockMvc {
 
     @Test
     public void testUpdateQuantityInOrderWithInvalidOrderID() throws Exception {
-        OrderItems orderItems = new OrderItems(1,6,35,"100000001111");
+        OrderItems orderItems = new OrderItems(1,30,"100000001111");
 
-        int orderId = orderItems.getOrderid();
-        int randomOrderId = 3821;
+        Order order = new Order();
+        order.setOrderID(6);
+        orderItems.setOrder(order);
+
+        int orderId =  orderItems.getOrder().getOrderID();
         String upc = orderItems.getUpc();
         int expectedUpdateQuantity = 50;
 
         Mockito.when(orderItemsSerivce.updateOrderItem(orderId, upc, expectedUpdateQuantity)).thenReturn(true);
 
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
-                .patch("/api/order/items/updateItemQuantity/" + randomOrderId + "/" + upc)
+                .patch("/api/order/items/updateItemQuantity/{orderId}/{upc}", 9999, upc)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
                 .content(this.mapper.writeValueAsBytes(expectedUpdateQuantity));

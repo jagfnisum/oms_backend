@@ -41,29 +41,29 @@ public class TestUpdateItemQuantityInOrder {
     void testUpdateQuantityInOrderWithValidOrderID() {
         log.debug("Testing Update Quantity In Order With Valid Order ID");
 
-        orderItems.setOrderid(10);
-        log.info("Set order ID = " + orderItems.getOrderid());
+        int orderId = 6;
+        log.info("Set order ID = " + orderId);
 
-        orderItems.setUpc("100000111111");
-        log.info("Set upc = " + orderItems.getUpc());
+        String upc = "100000001111";
+        log.info("Set upc = " + upc);
 
-        orderItems.setQuantity(25);
-        log.info("Set expected update quantity = " + orderItems.getQuantity());
+        int updatedQuantity = 30;
+        log.info("Set expected update quantity = " + updatedQuantity);
 
-        String requestBody = String.valueOf(orderItems.getQuantity());
+        String requestBody = String.valueOf(updatedQuantity);
 
         response = given()
                 .header("Content-type", "application/json")
                 .and()
                 .body(requestBody)
                 .when()
-                .patch("updateItemQuantity/" + orderItems.getOrderid() + "/" + orderItems.getUpc())
+                .patch("updateItemQuantity/" + orderId + "/" + upc)
                 .then()
                 .extract().response();
 
         int statusCode = response.getStatusCode();
 
-        String expectedResponseBody = "Item " + orderItems.getUpc() + " updated to " + orderItems.getQuantity();
+        String expectedResponseBody = "Item " + upc + " updated to " + updatedQuantity;
         String actualResponseBody = response.getBody().prettyPrint();
 
         log.info("Then the status code = " + statusCode);
@@ -76,25 +76,26 @@ public class TestUpdateItemQuantityInOrder {
     void testUpdateQuantityInOrderWithInvalidOrderID() {
         log.debug("Testing Update Quantity In Order With Valid Order ID");
 
-        orderItems.setOrderid(9999);
-        log.info("Set order ID = " + orderItems.getOrderid());
+        int orderId = 9999;
+        log.info("Set order ID = " + orderId);
 
-        orderItems.setUpc("100000111111");
-        log.info("Set upc = " + orderItems.getUpc());
+        String upc = "100000001111";
+        log.info("Set upc = " + upc);
 
-        orderItems.setQuantity(20);
-        log.info("Set expected update quantity = " + orderItems.getQuantity());
+        int updatedQuantity = 30;
+        log.info("Set expected update quantity = " + updatedQuantity);
 
-        String requestBody = String.valueOf(orderItems.getQuantity());
+        String requestBody = String.valueOf(updatedQuantity);
 
         response = given()
                 .header("Content-type", "application/json")
                 .and()
                 .body(requestBody)
                 .when()
-                .patch("updateItemQuantity/" + orderItems.getOrderid() + "/" + orderItems.getUpc())
+                .patch("updateItemQuantity/" + orderId + "/" + upc)
                 .then()
                 .extract().response();
+
         int statusCode = response.getStatusCode();
 
         log.info("Then the status code = " + statusCode);
