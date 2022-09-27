@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
 
                 case "Delivered":
                     if (exists.get().getOrderStatus().equals("Shipped")) {
-                        exists.get().setDateDelivered(dtf.format(now));
+//                        exists.get().setDateDelivered(dtf.format(now));
                         exists.get().setOrderStatus(status);
                         repo.save(exists.get());
                         return true;
@@ -112,7 +112,6 @@ public class OrderServiceImpl implements OrderService {
         LocalDateTime now = LocalDateTime.now();       
         order.setDateOrdered(dtf.format(now));
         order.setOrderStatus("Pending");
-		order.setDateDelivered(null);
 		order.setDateShipped(null);		
 		System.out.println(order);
 		Order newlyCreatedOrder = repo.save(order);

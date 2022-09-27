@@ -29,7 +29,8 @@ public class OrderItemsServiceImpl implements OrderItemsSerivce{
             return exist;
         }else{
             for(OrderItems item:exist){
-                if(item.getOrderid()==id){
+//                if(item.getOrderID()==id){
+                	if(item.getOrder().getOrderID() == id) {
                     items.add(item);
                 }
             }
@@ -53,13 +54,13 @@ public class OrderItemsServiceImpl implements OrderItemsSerivce{
         if(exist.isEmpty()){
             return false;
         }else{
-            for(OrderItems current:exist){
-                if(current.getOrderid()==orderid && current.getUpc().equals(upc)){    
-                    current.setQuantity(updatedQuantity);
-                    repo.save(current);
-                    return true;
-                }
-            }
+//            for(OrderItems current:exist){
+//                if(current.getOrderid()==orderid && current.getUpc().equals(upc)){    
+//                    current.setQuantity(updatedQuantity);
+//                    repo.save(current);
+//                    return true;
+//                }
+//            }
         }
         return false;
     }
