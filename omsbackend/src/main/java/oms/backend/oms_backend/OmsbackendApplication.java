@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 // @SpringBootApplication
 @SpringBootApplication(scanBasePackages="oms.*")
 @EnableJpaRepositories(basePackages="oms.*")
+//@EnableJpaRepositories(basePackages="oms.backend.oms_backend")
 @EntityScan(basePackages="oms.*")
 public class OmsbackendApplication {
 

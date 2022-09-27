@@ -45,26 +45,16 @@ public class OrderServiceImpl implements OrderService {
                     return false;
 
                 case "Shipped":
-                    if (exists.get().getOrderStatus().equals("Ordered")) {
+                    if (exists.get().getOrderStatus().equals("Pending")) {
                         exists.get().setDateShipped(dtf.format(now));
                         exists.get().setOrderStatus(status);
                         repo.save(exists.get());
                         return true;
                     }
                     return false;
-
-                case "Delivered":
-                    if (exists.get().getOrderStatus().equals("Shipped")) {
-//                        exists.get().setDateDelivered(dtf.format(now));
-                        exists.get().setOrderStatus(status);
-                        repo.save(exists.get());
-                        return true;
-                    }
-                    return false;
-
+                    
                 case "Canceled":
-                    if (exists.get().getOrderStatus().equals("Ordered")) {
-                        System.out.println(exists.get().getOrderStatus());
+                    if (exists.get().getOrderStatus().equals("Pending")) {
                         exists.get().setOrderStatus(status);
                         repo.save(exists.get());
                         return true;

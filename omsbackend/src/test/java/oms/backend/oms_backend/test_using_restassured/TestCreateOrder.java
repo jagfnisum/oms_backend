@@ -1,4 +1,4 @@
-package oms.backend.oms_backend;
+package oms.backend.oms_backend.test_using_restassured;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;

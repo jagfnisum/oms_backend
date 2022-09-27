@@ -1,4 +1,4 @@
-package oms.backend.oms_backend;
+package oms.backend.oms_backend.test_using_restassured;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -25,7 +25,6 @@ public class TestGetOrders {
 
     private static Integer port = 8080;
 
-    private Integer orderId;
     private String url = "http://localhost:";
 
     private String path = "/api/order/";

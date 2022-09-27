@@ -3,7 +3,6 @@ package oms.backend.models;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Table(name="order_items")

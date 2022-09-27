@@ -1,22 +1,12 @@
 package oms.backend.models;
 
-import java.util.ArrayList;
+import lombok.*;
 import java.util.List;
+import javax.persistence.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+@Data
+@NoArgsConstructor
 @Table(name = "Orders")
 @Entity
 public class Order {
@@ -33,7 +23,20 @@ public class Order {
     
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<OrderItems> orderItems;
-    
+
+
+    public Order(int order_id, int user_id, int address_id, int price, int credit_card_id, String date_ordered, String date_shipped, String order_status) {
+        this.order_id = order_id;
+        this.user_id = user_id;
+        this.address_id = address_id;
+        this.price = price;
+        this.credit_card_id = credit_card_id;
+        this.date_ordered = date_ordered;
+        this.date_shipped = date_shipped;
+        this.order_status = order_status;
+
+    }
+
     public List<OrderItems> getOrderItems() {
 		return orderItems;
 	}
@@ -92,13 +95,12 @@ public class Order {
         this.date_shipped = dateShipped;
     }
 
-	@Override
+    @Override
 	public String toString() {
 		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", address_id=" + address_id + ", price="
 				+ price + ", credit_card_id=" + credit_card_id + ", date_ordered=" + date_ordered + ", date_shipped="
 				+ date_shipped + ", order_status=" + order_status
-				+ ", orderItems=" + orderItems 
-				+ "]";
+				+ ", orderItems=" + orderItems + "]";
 	}
     
 }
