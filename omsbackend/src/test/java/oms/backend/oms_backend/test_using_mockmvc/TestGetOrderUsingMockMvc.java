@@ -71,10 +71,10 @@ public class TestGetOrderUsingMockMvc {
 
         Mockito.when(orderService.getOrderById(1)).thenReturn(Optional.of(order1));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/order/getOrders/1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/order/getOrders/{order_id}", 1).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("order_id", is(1)))
-                .andExpect(jsonPath("order_status", is("Cancelled")));
+                .andExpect(jsonPath("orderID", is(1)))
+                .andExpect(jsonPath("orderStatus", is("Cancelled")));
 
     }
 }
