@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import oms.backend.models.OrderItems;
 import oms.backend.services.OrderItemsSerivce;
 
+@CrossOrigin
 @RequestMapping("api/order/items")
 @RestController
 public class OrderItemsController {
