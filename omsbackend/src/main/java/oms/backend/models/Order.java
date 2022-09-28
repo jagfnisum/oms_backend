@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Table(name = "Orders")
 @Entity
-@NoArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
