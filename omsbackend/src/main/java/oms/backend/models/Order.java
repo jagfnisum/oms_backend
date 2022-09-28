@@ -21,8 +21,15 @@ public class Order {
     String order_status;
     
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<OrderItems> orderItems;
-
+    List<OrderItems> orderItems;   
+    
+    /**
+     * Default constructor for Order
+     */
+    public Order() {
+    	
+    }
+    
     public Order(int order_id, int user_id, int address_id, int price, int credit_card_id, String date_ordered, String date_shipped, String order_status) {
         this.order_id = order_id;
         this.user_id = user_id;
