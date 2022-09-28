@@ -60,8 +60,7 @@ public class TestCreateOrder {
         newOrder.put("userId", 4);
         newOrder.put("addressID", 4);
         newOrder.put("creditCardID", 4);
-        newOrder.put("orderItems", 4);
-
+        
         orderItem1.put("quantity", 20);
         orderItem1.put("upc", "100001111111");
 
