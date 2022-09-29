@@ -23,7 +23,17 @@ public class CreditCard {
 
     @Column(name = "expiration_month")
     private String expiration_month;
- 
+
+    public String getCard_number() {
+        return card_number;
+    }
+
+    public void setCard_number(String card_number) {
+        this.card_number = card_number;
+    }
+
+    @Column(name = "card_number")
+    private String card_number;
 
     public Integer getCredit_card_id() {
         return credit_card_id;
