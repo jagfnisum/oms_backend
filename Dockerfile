@@ -7,7 +7,7 @@ COPY omsbackend/src $APP_HOME/src/
 # build the .jar file
 COPY omsbackend/pom.xml $APP_HOME/
 USER root
-RUN mvn -f $APP_HOME/pom.xml clean package
+RUN mvn -f $APP_HOME/pom.xml clean package -Dmaven.test.skip
 
 # actual container
 FROM adoptopenjdk/openjdk11:alpine-jre
