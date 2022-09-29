@@ -11,7 +11,7 @@ RUN mvn -f $APP_HOME/pom.xml clean package -Dmaven.test.skip
 
 # actual container
 FROM adoptopenjdk/openjdk11:alpine-jre
-ENV ARTIFACT_NAME=oms-backend-0.0.1-SNAPSHOT.jar
+ENV ARTIFACT_NAME=oms_backend-0.0.1-SNAPSHOT.jar
 ENV APP_HOME=/usr/app/
 
 WORKDIR $APP_HOME
