@@ -54,7 +54,7 @@ public class OrderController {
      */
     @PutMapping("/updateOrder/cancelled/{id}")
     public ResponseEntity<String> cancelledOrder(@PathVariable("id") int id){
-        boolean success = service.updateOrder(id, "Canceled");
+        boolean success = service.updateOrder(id, "Cancelled");
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).body(id + " Cancelled successfully");
         }
