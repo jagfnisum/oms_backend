@@ -1,4 +1,4 @@
-package oms.backend.config;
+package oms.backend.kafka;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +8,10 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
+
+import oms.backend.models.Order;
+
 import java.util.*;
 
 @Configuration
@@ -26,18 +30,18 @@ public class KafkaProducerConfig {
                 StringSerializer.class);
         configProps.put(
                 ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                StringSerializer.class);
+                JsonSerializer.class);
         return configProps;
     }
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    public ProducerFactory<String, Order> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate(
-            ProducerFactory<String, String> producerFactory
+    public KafkaTemplate<String, Order> kafkaTemplate(
+            ProducerFactory<String, Order> producerFactory
     ) {
         return new KafkaTemplate<>(producerFactory);
     }

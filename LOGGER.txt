@@ -1,0 +1,2 @@
+SHIPPED FOUND
+Order [order_id=42, user_id=5, address_id=6, price=14.0, credit_card_id=6, date_ordered=2022-09-29 16:20:58, date_shipped=2022-09-30 10:44:29, order_status=Shipped, orderItems=[{ orderitemid='107', orderid='42', quantity='1', upc='100000000001'}, { orderitemid='108', orderid='42', quantity='1', upc='100000000111'}]]

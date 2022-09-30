@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,9 @@ public class OrderController {
     @Autowired
     OrderService service;
 
+    @Autowired
+    KafkaTemplate<String, Order> kafkaTemplate;
+
     /**This method takes in an integer id and lets us update
      * the order to be labeled as shipped
      * @param id an integer that reprsents the orderid of the order we want to update to shipped
@@ -36,6 +40,8 @@ public class OrderController {
     public ResponseEntity<String> shippedOrder(@PathVariable("id") int id){
         boolean success = service.updateOrder(id, "Shipped");
         if (success) {
+            // Order order = service.getOrderById(id).get();
+            // kafkaTemplate.send("wms-order-shipped", order);
             return ResponseEntity.status(HttpStatus.OK).body(id + " Shipped successfully");
         }
         else {
@@ -56,6 +62,8 @@ public class OrderController {
     public ResponseEntity<String> cancelledOrder(@PathVariable("id") int id){
         boolean success = service.updateOrder(id, "Canceled");
         if (success) {
+            Order order = service.getOrderById(id).get();
+            kafkaTemplate.send("oms-order-canceled", order);
             return ResponseEntity.status(HttpStatus.OK).body(id + " Cancelled successfully");
         }
         else {
@@ -128,6 +136,7 @@ public class OrderController {
     public ResponseEntity<String> createOrder(@RequestBody Order order){
     	boolean success = service.createOrder(order);
     	if(success) {
+            kafkaTemplate.send("oms-order-create", order);
     		return ResponseEntity.status(HttpStatus.CREATED).body("Order created");
     	} else {
     		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
