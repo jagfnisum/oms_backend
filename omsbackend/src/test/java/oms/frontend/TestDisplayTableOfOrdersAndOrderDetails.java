@@ -38,7 +38,6 @@ public class TestDisplayTableOfOrdersAndOrderDetails {
         driver.findElement(By.id("passwordNext")).click();
         Thread.sleep(4000);
         driver.switchTo().window(mainwindow);
-
     }
 
     @Test
