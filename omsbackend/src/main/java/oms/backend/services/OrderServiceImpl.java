@@ -53,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
                     }
                     return false;
                     
-                case "Canceled":
+                case "Cancelled":
                     if (exists.get().getOrderStatus().equals("Pending")) {
                         exists.get().setOrderStatus(status);
                         repo.save(exists.get());
