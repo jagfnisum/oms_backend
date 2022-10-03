@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-ascend-oms-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-ascend-oms-backend
+  template:
+    metadata:
+      labels:
+        app: demo-ascend-oms-backend
+    spec:
+      containers:
+        - name: demo-ascend-oms-backend
+          image: hub.docker.com/repository/docker/gyamano/final-backend-demo-app:7
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+      imagePullSecrets:
+        - name: registry-creds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-ascend-oms-backend
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: demo-ascend-oms-backend
